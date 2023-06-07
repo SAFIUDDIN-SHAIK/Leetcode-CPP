@@ -1,0 +1,40 @@
+class Solution {
+
+ public:
+
+  bool canMakeArithmeticProgression(vector<int>& arr) {
+
+    const int n = arr.size();
+    const int num1 = *max_element(begin(arr), end(arr));
+    const int num2 = *min_element(begin(arr), end(arr));
+    const int num = num1 - num2;
+
+    if (num % (n - 1) != 0)
+
+      return false;
+
+    const int d = num / (n - 1);
+
+    if (d == 0)
+
+      return true;
+
+    unordered_set<int> vis;
+
+    for (const int a : arr) {
+
+      if ((a - num2) % d != 0)
+
+        return false;
+
+      if (!vis.insert(a).second)
+
+        return false;
+
+    }
+
+    return true;
+
+  }
+
+};
