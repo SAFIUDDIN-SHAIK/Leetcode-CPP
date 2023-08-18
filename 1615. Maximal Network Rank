@@ -1,0 +1,56 @@
+class Solution {
+
+public:
+
+    int f(int i, int j){
+
+        if(i > j) swap(i, j);
+
+        return (i<<7)+j;
+
+    }
+    
+    int maximalNetworkRank(int n, vector<vector<int>>& roads) {
+
+        vector<int> l(n, 0);
+        unordered_set<int> a;
+        
+        for(vector<int>& road : roads){
+
+            a.insert(f(road[0], road[1]));
+            ++l[road[0]];
+            ++l[road[1]];
+
+        }
+        
+        int mi = max_element(l.begin(), l.end()) - l.begin();
+        int md = l[mi];
+        int c = count(l.begin(), l.end(), md);
+        
+        size_t ans = 0;
+        
+        if(c == 1){
+
+            for(int j = 0; j < n; ++j){
+
+                if(j == mi) continue;
+
+                ans = max(ans, md+l[j]-a.count(f(mi, j)));
+
+            }
+
+        }else{
+
+            int temp = count_if(roads.begin(), roads.end(), [&l, &md](vector<int>& num){
+                    
+                    return (l[num[0]] == md) && (l[num[1]] == md);});
+            
+            ans = md * 2 - (temp == c*(c-1)/2);
+        
+        }
+        
+        return ans;
+
+    }
+
+};
