@@ -1,0 +1,13 @@
+class Solution {
+
+ public:
+
+  int getLastMoment(int n, vector<int>& left, vector<int>& right) {
+
+    const int l = left.empty() ? 0 : ranges::max(left);
+    const int r = right.empty() ? n : ranges::min(right);
+    return max(l, n - r);
+
+  }
+
+};
