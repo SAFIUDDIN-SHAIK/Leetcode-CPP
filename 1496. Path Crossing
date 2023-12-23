@@ -1,0 +1,52 @@
+class Solution {
+
+ public:
+
+  bool isPathCrossing(string path) {
+
+    set<int> vis;
+    vis.insert(0);
+    int x = 0;
+    int y = 0;
+
+    for (const char ch : path) {
+
+      switch (ch) {
+
+        case 'N':
+
+          ++y;
+          break;
+
+        case 'S':
+
+          --y;
+          break;
+
+        case 'E':
+
+          ++x;
+          break;
+
+        case 'W':
+
+          --x;
+          break;
+
+      }
+
+      const int key = x * 20001 + y;
+
+      if (vis.count(key))
+
+        return true;
+
+      vis.insert(key);
+
+    }
+
+    return false;
+
+  }
+
+};
