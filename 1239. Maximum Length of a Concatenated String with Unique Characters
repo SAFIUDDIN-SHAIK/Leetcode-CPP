@@ -1,0 +1,33 @@
+class Solution {
+
+public:
+
+    int maxLength(vector<string>& arr) {
+
+        vector<string> d = {""};
+
+        int mx = 0;
+
+        for (string st : arr) {
+
+            for (int i = 0; i < d.size(); i++) {
+
+                string s = d[i] + st;
+                unordered_set<char> l(s.begin(), s.end());
+
+                if (s.size() != l.size())
+
+                    continue;
+
+                d.push_back(s);
+                mx = max(mx, (int)s.size());
+
+            }
+
+        }
+
+        return mx;
+
+    }
+
+};
